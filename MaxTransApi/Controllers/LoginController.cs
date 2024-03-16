@@ -1,4 +1,5 @@
-﻿using MaxTransApi.Modals;
+﻿using BusinessEntity;
+using DataAccess;
 using MaxTransApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
 
 namespace MaxTransApi.Controllers
 {
@@ -21,45 +23,55 @@ namespace MaxTransApi.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        [Route("verifylogin")]
+        public async Task<IActionResult> Login([FromBody] LoginModal user)
         {
-            var user = new User() {  Username ="test" , Password ="pass" };
-            //if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-            if (user != null)
+           
+             var userInfo = new LoginService().VerifyLogin(user.Username, user.Password); 
+            if (userInfo != null && !string.IsNullOrEmpty(userInfo.Id))
             {
                 //var userRoles = await _userManager.GetRolesAsync(user);
 
-                var userRoles  = new List<string>() { "1","2" };
+                //var userRoles  = new List<string>() { userInfo.RoleName };
                 var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Name, userInfo.LoginName),
+                    new Claim(ClaimTypes.Email, userInfo.Email),
+                    new Claim(ClaimTypes.Role, userInfo.RoleName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
+                //foreach (var userRole in userRoles)
+                //{
+                //    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                //}
 
                 var token = CreateToken(authClaims);
                 var refreshToken = GenerateRefreshToken();
 
                 _ = int.TryParse(_config["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
 
-                user.RefreshToken = refreshToken;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+                //var model = new User();
+                //model.RefreshToken = refreshToken;
+                //model.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
 
                 //await _userManager.UpdateAsync(user);
 
-                return Ok(new
-                {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    RefreshToken = refreshToken,
-                    Expiration = token.ValidTo
+                userInfo.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                userInfo.RefreshToken = refreshToken;
+                userInfo.Expiration = token.ValidTo;
+
+                return Ok(new ApiResult { 
+                    Data = userInfo,
+                    IsSuccess = true
                 });
             }
-            return Unauthorized();
+            return Ok(new ApiResult
+            {
+                Data = null,
+                IsSuccess = false,
+                Message = "Invalid Username/Password"
+            });
         }
 
         [HttpPost]
@@ -85,7 +97,7 @@ namespace MaxTransApi.Controllers
 
 
             //var user = await _userManager.FindByNameAsync(username);
-            var user = new User() { Username = "test", Password = "pass", RefreshToken = refreshToken };
+            var user = new User() { LoginName = "test", Password = "pass", RefreshToken = refreshToken };
 
             //if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
             if (user == null || user.RefreshToken != refreshToken)

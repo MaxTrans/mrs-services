@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration;
 
+DataAccess.Base.DataContext.AddConnection(configuration["ConnectionStrings:ConnStr"] ?? string.Empty);
+
 ////Jwt configuration starts here
 //var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 //var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
@@ -95,6 +97,10 @@ builder.Services.AddSwaggerGen(options => {
 });
 
 var app = builder.Build();
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
