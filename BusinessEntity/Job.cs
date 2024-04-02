@@ -29,6 +29,7 @@ namespace BusinessEntity
         public DateTime ModifiedDateTime { get; set; }
 
         public string JobFiles { get; set; }
-        
+        public string UserName { get; set; }
+
     }
 }

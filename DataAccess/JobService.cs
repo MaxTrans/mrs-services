@@ -38,7 +38,8 @@ namespace DataAccess
                     ParentJobId = dr["ParentJobId"].ToStr(),
                     Priority = dr["Priority"].ToStr(),
                     Status = dr["Status"].ToStr(),
-                    StatusName = dr["StatusName"].ToStr()
+                    StatusName = dr["StatusName"].ToStr(),
+                    UserName = dr["UserName"].ToStr()
                 });
             });
 
