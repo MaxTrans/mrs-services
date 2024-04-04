@@ -26,8 +26,9 @@ namespace MaxTransApi.Controllers
         [Route("verifylogin")]
         public async Task<IActionResult> Login([FromBody] LoginModal user)
         {
-           
-             var userInfo = new LoginService().VerifyLogin(user.Username, user.Password); 
+
+            var userInfo = new LoginService().VerifyLogin(user.Username, user.Password); 
+
             if (userInfo != null && !string.IsNullOrEmpty(userInfo.Id))
             {
                 //var userRoles = await _userManager.GetRolesAsync(user);
@@ -54,7 +55,6 @@ namespace MaxTransApi.Controllers
                 //var model = new User();
                 //model.RefreshToken = refreshToken;
                 //model.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
-
                 //await _userManager.UpdateAsync(user);
 
                 userInfo.Token = new JwtSecurityTokenHandler().WriteToken(token);
