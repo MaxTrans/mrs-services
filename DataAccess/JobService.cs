@@ -21,6 +21,7 @@ namespace DataAccess
             var dbresult = this.ExecuteReader((dr) => {
                 jobs.Add(new Job { 
                     Id = dr["Id"].ToStr(),
+                    JobId = dr["JobId"].ToInt(),
                     AssignTo = dr["AssignTo"].ToStr(),
                     CompanyId = dr["CompanyId"].ToStr(),
                     CreatedBy = dr["CreatedBy"].ToStr(),
@@ -39,7 +40,8 @@ namespace DataAccess
                     Priority = dr["Priority"].ToStr(),
                     Status = dr["Status"].ToStr(),
                     StatusName = dr["StatusName"].ToStr(),
-                    UserName = dr["UserName"].ToStr()
+                    UserName = dr["UserName"].ToStr(),
+                    UnReadMessages = dr["UnReadMessages"].ToInt(),
                 });
             });
 

@@ -10,6 +10,7 @@ namespace BusinessEntity
     public class Job
     {
         public string Id { get; set; }
+        public int JobId { get; set; }
         public string Name { get; set; }
         public string Priority { get; set; }
         public string Notes { get; set; }
@@ -30,6 +31,7 @@ namespace BusinessEntity
 
         public string JobFiles { get; set; }
         public string UserName { get; set; }
+        public int UnReadMessages { get; set; }
 
     }
 }
