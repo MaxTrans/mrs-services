@@ -70,11 +70,11 @@ namespace MaxTransApi.Controllers
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
-                    dr["CreatedBy"] = "6b535790-9dea-4c17-aa04-fe599c0fba62";
+                    dr["CreatedBy"] = job.CreatedBy;
                     dt.Rows.Add(dr);
                 }
 
-                var output = new UploadService().SaveJob(dt, $"J-{new Guid().ToString()}", new Guid().ToString(), job.Comment, job.UploadType, "4c82bf3c-fc5e-4405-a5e6-a441c43bed73", "6b535790-9dea-4c17-aa04-fe599c0fba62");
+                var output = new UploadService().SaveJob(dt, $"J-{new Guid().ToString()}", new Guid().ToString(), job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
                 result.Data = output;
                 result.IsSuccess = true;
                 return Ok(result);
