@@ -10,10 +10,11 @@ namespace DataAccess
 {
     public class NotificationService : DataContext
     {
-        public List<Notification> GetNotifications(string jobId)
+        public List<Notification> GetNotifications(string jobId, string userId)
         {
             this.ProcedureName = Procedures.Notification.USP_GETNOTIFICATIONS;
             this.AddParameter("@JobId", jobId);
+            this.AddParameter("@UserId", userId);
 
             var notifications = new List<Notification>();
 

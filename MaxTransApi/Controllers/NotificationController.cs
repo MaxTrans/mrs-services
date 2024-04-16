@@ -12,11 +12,11 @@ namespace MaxTransApi.Controllers
     {
         [HttpGet]
         [Route("getnotifications")]
-        public async Task<IActionResult> GetNotifications(string jobId)
+        public async Task<IActionResult> GetNotifications(string jobId, string userId)
         {
             try
             {
-                var notifications = new NotificationService().GetNotifications(jobId);
+                var notifications = new NotificationService().GetNotifications(jobId, userId);
                 return Ok(new ApiResult
                 {
                     Data = notifications,
