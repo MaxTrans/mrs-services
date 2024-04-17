@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessEntity;
@@ -21,7 +22,7 @@ namespace DataAccess
         {
             try
             {
-                this.ProcedureName = "usp_SaveJob";
+                this.ProcedureName = Procedures.Jobs.USP_SAVEJOB;
                 this.AddParameter("@JobFiles", jobFiles);
                 this.AddParameter("@JobName", jobName);
                 this.AddParameter("@Priority", priority);
@@ -31,7 +32,7 @@ namespace DataAccess
                 this.AddParameter("@CreatedBy", createdBy);
                 var result = this.ExecuteNonQuery((cmd) =>
                 {
-                    cmd.ExecuteNonQuery();
+
                 });
 
                 return result.IsSuccess;

@@ -11,6 +11,7 @@ namespace DataAccess
         public static class Jobs
         {
             public const string USP_GETJOBS = "USP_GetJobs";
+            public const string USP_SAVEJOB = "usp_SaveJob";
         }
 
         public static class LookUp

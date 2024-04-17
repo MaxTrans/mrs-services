@@ -10,6 +10,10 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+
 
 namespace MaxTransApi.Controllers
 {
@@ -74,7 +78,7 @@ namespace MaxTransApi.Controllers
                     dt.Rows.Add(dr);
                 }
 
-                var output = new UploadService().SaveJob(dt, $"J-{new Guid().ToString()}", new Guid().ToString(), job.Comment, job.UploadType, "4c82bf3c-fc5e-4405-a5e6-a441c43bed73", "6b535790-9dea-4c17-aa04-fe599c0fba62");
+                var output = new UploadService().SaveJob(dt, $"J-{Guid.NewGuid().ToString()}", Guid.NewGuid().ToString(), job.Comment, job.UploadType, "4c82bf3c-fc5e-4405-a5e6-a441c43bed73", "6b535790-9dea-4c17-aa04-fe599c0fba62");
                 result.Data = output;
                 result.IsSuccess = true;
                 return Ok(result);
@@ -86,6 +90,41 @@ namespace MaxTransApi.Controllers
                 return BadRequest(result);
             }
         }
+
+        [HttpPost("GetPresignedUrl")]
+        public IActionResult GetPresignedUrl(string filename, string type)
+        {
+            string bucketName = "";
+            RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
+
+            var client = new AmazonS3Client(bucketRegion);
+
+            GetPreSignedUrlRequest presignedUrl = new GetPreSignedUrlRequest
+            {
+                BucketName = bucketName,
+                Expires = DateTime.UtcNow.AddHours(1),
+                Key = $"{filename}.{type}",
+                Verb = HttpVerb.PUT,
+            };
+            
+
+            string preSignedUrl = client.GetPreSignedURL(presignedUrl);
+
+            return Ok(preSignedUrl);
+        }
+
+        //[HttpPost("Multipart")]
+        //public IActionResult GetUploadMultiPart(string type)
+        //{
+        //    string bucketName = "";
+        //    RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
+
+        //    var client = new AmazonS3Client(bucketRegion);
+
+        //    string preSignedUrl = client.c
+
+        //    return Ok(preSignedUrl);
+        //}
 
     }
 }
