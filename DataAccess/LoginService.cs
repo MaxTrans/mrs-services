@@ -20,14 +20,15 @@ namespace DataAccess
             var user = new User();
 
             var dbresult = this.ExecuteReader((dr) => {
-                user.Id = dr["Id"].ToString();
-                user.FirstName = dr["FirstName"].ToString();
-                user.LastName = dr["LastName"].ToString();
-                user.LoginName = dr["LoginName"].ToString();
-                user.PhoneNo = dr["PhoneNo"].ToString();
-                user.RoleName = dr["RoleName"].ToString();
-                user.Email = dr["Email"].ToString();
-                user.CompanyName = dr["CompanyName"].ToString();
+                user.Id = dr["Id"].ToStr();
+                user.FirstName = dr["FirstName"].ToStr();
+                user.LastName = dr["LastName"].ToStr();
+                user.LoginName = dr["LoginName"].ToStr();
+                user.PhoneNo = dr["PhoneNo"].ToStr();
+                user.RoleName = dr["RoleName"].ToStr();
+                user.Email = dr["Email"].ToStr();
+                user.CompanyId = dr["CompanyId"].ToStr();
+                user.CompanyName = dr["CompanyName"].ToStr();
             });
 
 

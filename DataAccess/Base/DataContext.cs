@@ -81,11 +81,11 @@ namespace DataAccess.Base
                 var res = cmd.ExecuteNonQuery();
 
                 if (action != null) action(cmd);
-                return new DBResult { IsSuccess = true };
+                return new DBResult { IsSuccess = true, ResultCount = res };
             });
         }
 
-        protected DBResult ExecuteNonQuery(Action<SqlCommand, object>? action = null)
+        protected DBResult ExecuteScalar(Action<SqlCommand, object>? action = null)
         {
             return RunCommand((cmd) => {
                 var res = cmd.ExecuteScalar();

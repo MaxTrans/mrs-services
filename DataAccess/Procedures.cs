@@ -19,5 +19,11 @@ namespace DataAccess
             public const string USP_GETUSERLOOKUP = "USP_GetUserLookup";
             public const string USP_GETLOOKUPDATA = "USP_GetLookupData";
         }
+
+        public static class Notification
+        {
+            public const string USP_GETNOTIFICATIONS = "USP_GetNotifications";
+            public const string USP_INSERTNOTIFICATION = "USP_InsertNotification";
+        }
     }
 }

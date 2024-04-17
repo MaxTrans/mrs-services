@@ -6,6 +6,8 @@
         public bool UploadType { get; set; }  
         public string Tat { get; set; }
         public string Comment {  get; set; }
+        public string CreatedBy { get; set; }
+        public string CompanyId { get; set; }
     }
 
     public class UploadFileModal
@@ -14,5 +16,8 @@
         public string FilePath { get; set; }
         public string FileExtension { get; set; }
         public int Size { get; set; }
+       
+
+
     }
 }

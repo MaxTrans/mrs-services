@@ -10,17 +10,19 @@ namespace DataAccess
 {
     public class JobService : DataContext
     {
-        public List<Job> GetJob(string jobStatus, string createdBy) 
+        public List<Job> GetJob(string userId, string jobStatus, string createdBy) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;
             this.AddParameter("@JobStatus", jobStatus);
             this.AddParameter("@CreatedBy", createdBy);
+            this.AddParameter("@UserId", userId);
 
             var jobs = new List<Job>();
 
             var dbresult = this.ExecuteReader((dr) => {
                 jobs.Add(new Job { 
                     Id = dr["Id"].ToStr(),
+                    JobId = dr["JobId"].ToInt(),
                     AssignTo = dr["AssignTo"].ToStr(),
                     CompanyId = dr["CompanyId"].ToStr(),
                     CreatedBy = dr["CreatedBy"].ToStr(),
@@ -39,7 +41,8 @@ namespace DataAccess
                     Priority = dr["Priority"].ToStr(),
                     Status = dr["Status"].ToStr(),
                     StatusName = dr["StatusName"].ToStr(),
-                    UserName = dr["UserName"].ToStr()
+                    UserName = dr["UserName"].ToStr(),
+                    UnReadMessages = dr["UnReadMessages"].ToInt(),
                 });
             });
 

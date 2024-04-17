@@ -17,7 +17,12 @@ namespace DataAccess.Base
             else
                 return value.ToString();
         }
-
+        public static int ToInt(this object value)
+        {
+            int res;
+            int.TryParse(value.ToStr(), out res);
+            return res;
+        }
         public static bool ToBool(this object value)
         {
             bool res;

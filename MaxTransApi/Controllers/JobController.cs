@@ -10,10 +10,10 @@ namespace MaxTransApi.Controllers
     {
         [HttpGet]
         [Route("getjobs")]
-        public async Task<IActionResult> GetJobs(string? jobStatus, string? createdBy)
+        public async Task<IActionResult> GetJobs(string userId, string? jobStatus, string? createdBy)
         {
             try {
-                var jobs = new JobService().GetJob(jobStatus, createdBy);
+                var jobs = new JobService().GetJob(userId, jobStatus, createdBy);
                 return Ok(new ApiResult
                 {
                     Data = jobs,

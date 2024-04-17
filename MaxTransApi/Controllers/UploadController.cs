@@ -74,7 +74,7 @@ namespace MaxTransApi.Controllers
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
-                    dr["CreatedBy"] = "6b535790-9dea-4c17-aa04-fe599c0fba62";
+                    dr["CreatedBy"] = job.CreatedBy;
                     dt.Rows.Add(dr);
                 }
 

@@ -56,8 +56,40 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Save-Job-DbChanges.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Vendor.sql" />
+    <Build Include="dbo\Tables\Users.sql" />
+    <Build Include="dbo\Tables\UserRoles.sql" />
+    <Build Include="dbo\Tables\UserPreferences.sql" />
+    <Build Include="dbo\Tables\UserNotifications.sql" />
+    <Build Include="dbo\Tables\UserLevelTypes.sql" />
+    <Build Include="dbo\Tables\UserInfo.sql" />
+    <Build Include="dbo\Tables\UserAssignEmployee.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\JobUploadFiles.sql" />
+    <Build Include="dbo\Tables\JobStatus.sql" />
+    <Build Include="dbo\Tables\Jobs.sql" />
+    <Build Include="dbo\Tables\JobNotifications.sql" />
+    <Build Include="dbo\Tables\JobFiles.sql" />
+    <Build Include="dbo\Tables\FileTypes.sql" />
+    <Build Include="dbo\Tables\Company.sql" />
+    <Build Include="dbo\Tables\Client.sql" />
+    <Build Include="dbo\Tables\AppSettings.sql" />
+    <Build Include="dbo\Stored Procedures\USP_VerifyLogin.sql" />
+    <Build Include="dbo\Stored Procedures\usp_SaveJob.sql" />
+    <Build Include="dbo\Stored Procedures\USP_InsertNotification.sql" />
+    <Build Include="dbo\Stored Procedures\USP_GetUserLookup.sql" />
+    <Build Include="dbo\Stored Procedures\USP_GetNotifications.sql" />
+    <Build Include="dbo\Stored Procedures\USP_GetLookupData.sql" />
+    <Build Include="dbo\Stored Procedures\USP_GetJobs.sql" />
+    <Build Include="dbo\User Defined Types\JobFileType.sql" />
   </ItemGroup>
 </Project>
