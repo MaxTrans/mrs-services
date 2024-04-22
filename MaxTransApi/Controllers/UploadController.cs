@@ -71,7 +71,7 @@ namespace MaxTransApi.Controllers
                 foreach (var jobFile in job.UploadFiles)
                 {
                     var dr = dt.NewRow();
-                    dr["FileName"] = jobFile.FileName;
+                    dr["FileName"] = job.MergeFilename != string.Empty ? job.MergeFilename : jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = job.CreatedBy;

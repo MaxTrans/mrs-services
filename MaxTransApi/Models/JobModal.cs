@@ -8,6 +8,7 @@
         public string Comment {  get; set; }
         public string CreatedBy { get; set; }
         public string CompanyId { get; set; }
+        public string MergeFilename { get; set; }
     }
 
     public class UploadFileModal
