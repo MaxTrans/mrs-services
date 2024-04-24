@@ -92,40 +92,44 @@ namespace MaxTransApi.Controllers
             }
         }
 
-        [HttpPost("GetPresignedUrl")]
-        public IActionResult GetPresignedUrl(string filename, string type)
+        [HttpPost("AdminFileUpload")]
+        public IActionResult UploadFile([FromBody] AdminFileUpload fileUpload)
         {
-            string bucketName = "";
-            RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
-
-            var client = new AmazonS3Client(bucketRegion);
-
-            GetPreSignedUrlRequest presignedUrl = new GetPreSignedUrlRequest
+            ApiResult result = new ApiResult();
+            try
             {
-                BucketName = bucketName,
-                Expires = DateTime.UtcNow.AddHours(1),
-                Key = $"{filename}.{type}",
-                Verb = HttpVerb.PUT,
-            };
-            
+                DataTable dt = new DataTable();
+                dt.Columns.Add("FileName");
+                dt.Columns.Add("FileExtension");
+                dt.Columns.Add("SourceFilePath");
+                dt.Columns.Add("CreatedBy");
 
-            string preSignedUrl = client.GetPreSignedURL(presignedUrl);
+                foreach (var jobFile in fileUpload.UploadFiles)
+                {
+                    var dr = dt.NewRow();
+                    dr["FileName"] = jobFile.FileName;
+                    dr["FileExtension"] = jobFile.FileExtension;
+                    dr["SourceFilePath"] = jobFile.FilePath;
+                    dr["CreatedBy"] = fileUpload.CreatedBy;
+                    dt.Rows.Add(dr);
+                }
 
-            return Ok(preSignedUrl);
+
+                var output = new UploadService().SaveAdminFileUpload(dt, fileUpload.JobId, fileUpload.CreatedBy);
+                result.Data = output;
+                result.IsSuccess = true;
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.Data = $"{ex.Message}  Stack Trace: {ex.StackTrace}";
+                result.IsSuccess = false;
+                return BadRequest(result);
+            }
         }
 
-        //[HttpPost("Multipart")]
-        //public IActionResult GetUploadMultiPart(string type)
-        //{
-        //    string bucketName = "";
-        //    RegionEndpoint bucketRegion = RegionEndpoint.USEast1;
 
-        //    var client = new AmazonS3Client(bucketRegion);
 
-        //    string preSignedUrl = client.c
-
-        //    return Ok(preSignedUrl);
-        //}
 
     }
 }

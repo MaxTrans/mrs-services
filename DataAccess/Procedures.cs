@@ -12,6 +12,7 @@ namespace DataAccess
         {
             public const string USP_GETJOBS = "USP_GetJobs";
             public const string USP_SAVEJOB = "usp_SaveJob";
+            public const string USP_ADMINSAVEUPLOADFILE = "usp_AdminSaveUploadFile";
         }
 
         public static class LookUp

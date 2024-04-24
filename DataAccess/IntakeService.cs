@@ -43,5 +43,26 @@ namespace DataAccess
             }
         }
 
+        public bool SaveAdminFileUpload(DataTable jobFiles, string jobId, string createdBy)
+        {
+            try
+            {
+                this.ProcedureName = Procedures.Jobs.USP_ADMINSAVEUPLOADFILE;
+                this.AddParameter("@JobFiles", jobFiles);
+                this.AddParameter("@JobId", jobId);
+                this.AddParameter("@CreatedBy", createdBy);
+                var result = this.ExecuteNonQuery((cmd) =>
+                {
+
+                });
+
+                return result.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
