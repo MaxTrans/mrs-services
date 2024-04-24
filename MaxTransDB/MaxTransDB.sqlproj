@@ -91,5 +91,6 @@
     <Build Include="dbo\Stored Procedures\USP_GetLookupData.sql" />
     <Build Include="dbo\Stored Procedures\USP_GetJobs.sql" />
     <Build Include="dbo\User Defined Types\JobFileType.sql" />
+    <Build Include="dbo\Stored Procedures\usp_AdminSaveUploadFile.sql" />
   </ItemGroup>
 </Project>
