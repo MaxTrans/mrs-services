@@ -1,12 +1,7 @@
-﻿USE [Maxtra_Dev]
-GO
+﻿
 
 /****** Object:  StoredProcedure [dbo].[usp_AdminSaveUploadFile]    Script Date: 24-04-2024 23:29:22 ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
 
 CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]
 	@JobFiles JobFiletype READONLY,

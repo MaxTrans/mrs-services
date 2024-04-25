@@ -26,5 +26,10 @@ namespace DataAccess
             public const string USP_GETNOTIFICATIONS = "USP_GetNotifications";
             public const string USP_INSERTNOTIFICATION = "USP_InsertNotification";
         }
+
+        public static class User
+        {
+            public const string USP_SAVEPREFERENCES = "usp_SavePreferences";
+        }
     }
 }
