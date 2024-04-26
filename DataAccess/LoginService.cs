@@ -29,6 +29,7 @@ namespace DataAccess
                 user.Email = dr["Email"].ToStr();
                 user.CompanyId = dr["CompanyId"].ToStr();
                 user.CompanyName = dr["CompanyName"].ToStr();
+                user.FilePreference = dr["FilePreference"].ToStr();
             });
 
 
