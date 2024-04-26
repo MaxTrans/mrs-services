@@ -1,9 +1,4 @@
-﻿
-
-/****** Object:  StoredProcedure [dbo].[usp_AdminSaveUploadFile]    Script Date: 24-04-2024 23:29:22 ******/
-
-
-CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]
+﻿CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]
 	@JobFiles JobFiletype READONLY,
 	@JobId UNIQUEIDENTIFIER,
 	@CreatedBy UNIQUEIDENTIFIER
@@ -15,10 +10,16 @@ BEGIN
 		INSERT INTO [dbo].[JobFiles]
 			(
 			[FileName], FileExtension, SourceFilePath, JobId, CreatedBy
-			,CreatedDateTime
+			,CreatedDateTime,IsUploadFile
 			)
-		SELECT [FileName], FileExtension, SourceFilePath, @JobId, CreatedBy, GETUTCDATE()
+		SELECT [FileName], FileExtension, SourceFilePath, @JobId, CreatedBy, GETUTCDATE(),1
 		FROM @JobFiles
+
+		DECLARE @JobStatus UNIQUEIDENTIFIER 
+		SELECT @JobStatus = Id FROM JobStatus WHERE Description = 'Completed'
+
+		UPDATE Jobs SET Status = @JobStatus 
+		WHERE Id = @JobId
 		
 	END TRY
 	BEGIN CATCH
@@ -41,6 +42,3 @@ BEGIN
 				   );
 	END CATCH
 END
-GO
-
-

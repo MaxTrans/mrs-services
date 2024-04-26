@@ -7,7 +7,7 @@
 AS
 BEGIN 
 	SELECT J.*, JS.Description AS StatusName, U.FIrstName + ' ' + U.LastName AS UserName,
-	(SELECT FileName,FileExtension,SourceFilePath FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
+	(SELECT Id,FileName,FileExtension,SourceFilePath, IsUploadFile FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
 	(
 		SELECT COUNT(1) FROM JobNotifications N 
 		WHERE N.JobId = J.Id
@@ -22,3 +22,4 @@ BEGIN
 	AND (@CreatedBy IS NULL OR J.CreatedBy = @CreatedBy)
 	ORDER BY J.JobId
 END
+
