@@ -20,6 +20,7 @@
     [ModifyedBy]            UNIQUEIDENTIFIER NULL,
     [CreatedDateTime]       DATETIME         NOT NULL,
     [ModifiedDateTime]      DATETIME         NULL,
+    [FilePreference]         VARCHAR(50)      NULL
     CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

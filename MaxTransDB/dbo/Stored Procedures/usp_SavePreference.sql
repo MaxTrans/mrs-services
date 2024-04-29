@@ -7,13 +7,13 @@ CREATE PROCEDURE [dbo].[usp_SavePreferences]
 	@Website VARCHAR(100),
 	@DefaultTat INT,
 	@IsPDFAllowed BIT,
-	@IsDocAllowed BIT,
-	@CreatedBy UNIQUEIDENTIFIER
+	@IsDocAllowed BIT
+	
 AS
 BEGIN
 	
 	BEGIN TRY
-	IF NOT EXISTS(SELECT COUNT(0) FROM Client WHERE UserId = @UserId)
+	IF NOT EXISTS(SELECT * FROM Client WHERE UserId = @UserId)
 	BEGIN
 		INSERT INTO [dbo].[Client]
            ([UserId],[ClientType],[ClientName],[Details],[Website]

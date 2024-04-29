@@ -8,12 +8,14 @@
 	@CreatedBy UNIQUEIDENTIFIER
 AS
 BEGIN
-	
+	DECLARE @JobStatus UNIQUEIDENTIFIER
+	SELECT @JobStatus = Id FROM JobStatus WHERE Description = 'Pending'
 	BEGIN TRY
 		BEGIN TRAN 
 
 		IF(@IsSingleJob = 1)
 		BEGIN
+
 			DECLARE @InsertOutput TABLE (JobId UNIQUEIDENTIFIER)
 			DECLARE @JobID UNIQUEIDENTIFIER = NEWID()
 
@@ -24,7 +26,7 @@ BEGIN
 			OUTPUT inserted.Id INTO @InsertOutput
 			VALUES
 			   (@JobID, @JobName, @Priority, @Notes, @IsSingleJob,
-			   'fab98251-70c2-410b-bc09-9b66f9234e30',@CompanyId, @CreatedBy,
+			   @JobStatus,@CompanyId, @CreatedBy,
 		   GETUTCDATE())
 
 		   INSERT INTO [dbo].[JobFiles]
@@ -68,7 +70,7 @@ BEGIN
 				OUTPUT inserted.Id INTO @InsertOutput
 				VALUES
 				   (@NewJobID, @FileName, @Priority, @Notes, @IsSingleJob,
-				   'fab98251-70c2-410b-bc09-9b66f9234e30',@CompanyId, @CreatedBy,
+				   @JobStatus,@CompanyId, @CreatedBy,
 			   GETUTCDATE())
 
 			   INSERT INTO [dbo].[JobFiles]

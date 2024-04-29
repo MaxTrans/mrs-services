@@ -79,7 +79,7 @@ namespace MaxTransApi.Controllers
                 }
 
                 
-                var output = new UploadService().SaveJob(dt, job.MergeFilename , Guid.NewGuid().ToString(), job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
+                var output = new UploadService().SaveJob(dt, job.MergeFilename , job.Tat, job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
                 result.Data = output;
                 result.IsSuccess = true;
                 return Ok(result);
@@ -128,6 +128,25 @@ namespace MaxTransApi.Controllers
             }
         }
 
+        [HttpGet("GetUploadPreferences/{userId}")]
+        public IActionResult GetUploadTypes(string userId)
+        {
+            ApiResult result = new ApiResult();
+            try
+            {
+                var output = new UploadService().GetUploadTypes(userId);
+                result.Data = output;
+                result.IsSuccess = true;
+                return Ok(result);
+            }
+            catch (Exception ex) {
+                result.Data = $"{ex.Message}  Stack Trace: {ex.StackTrace}";
+                result.IsSuccess = false;
+                return BadRequest(result);
+            }
+        }
+
+       
 
 
 
