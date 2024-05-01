@@ -32,6 +32,6 @@ namespace BusinessEntity
         public string JobFiles { get; set; }
         public string UserName { get; set; }
         public int UnReadMessages { get; set; }
-
+        public string FilePreference { get; set; }
     }
 }

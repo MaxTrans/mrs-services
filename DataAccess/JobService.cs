@@ -43,6 +43,7 @@ namespace DataAccess
                     StatusName = dr["StatusName"].ToStr(),
                     UserName = dr["UserName"].ToStr(),
                     UnReadMessages = dr["UnReadMessages"].ToInt(),
+                    FilePreference = dr["FilePreference"].ToStr(),
                 });
             });
 

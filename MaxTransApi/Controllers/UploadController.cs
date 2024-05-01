@@ -103,6 +103,7 @@ namespace MaxTransApi.Controllers
                 dt.Columns.Add("FileExtension");
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
+                dt.Columns.Add("FileType");
 
                 foreach (var jobFile in fileUpload.UploadFiles)
                 {
@@ -111,6 +112,7 @@ namespace MaxTransApi.Controllers
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = fileUpload.CreatedBy;
+                    dr["FileType"] = fileUpload.FileType;
                     dt.Rows.Add(dr);
                 }
 
@@ -127,28 +129,6 @@ namespace MaxTransApi.Controllers
                 return BadRequest(result);
             }
         }
-
-        [HttpGet("GetUploadPreferences/{userId}")]
-        public IActionResult GetUploadTypes(string userId)
-        {
-            ApiResult result = new ApiResult();
-            try
-            {
-                var output = new UploadService().GetUploadTypes(userId);
-                result.Data = output;
-                result.IsSuccess = true;
-                return Ok(result);
-            }
-            catch (Exception ex) {
-                result.Data = $"{ex.Message}  Stack Trace: {ex.StackTrace}";
-                result.IsSuccess = false;
-                return BadRequest(result);
-            }
-        }
-
-       
-
-
 
     }
 }
