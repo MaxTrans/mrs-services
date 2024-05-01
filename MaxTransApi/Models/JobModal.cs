@@ -16,7 +16,7 @@
         public string JobId { get; set; }
         public UploadFileModal[] UploadFiles { get; set; }
         public string CreatedBy { get; set; }
-        public string FileType { get; set; }
+       
     }
 
     public class UploadFileModal
@@ -25,6 +25,7 @@
         public string FilePath { get; set; }
         public string FileExtension { get; set; }
         public int Size { get; set; }
+        public string FileId { get; set; }
 
     }
 }

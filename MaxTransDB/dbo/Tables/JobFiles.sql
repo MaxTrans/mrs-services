@@ -2,6 +2,7 @@
     [Id]               UNIQUEIDENTIFIER CONSTRAINT [DF_JobFiles_Id] DEFAULT (newid()) NOT NULL,
     [FileName]         NVARCHAR (50)    NOT NULL,
     [FileExtension]    VARCHAR (5)      NOT NULL,
+    [FileId]           VARCHAR(500)     NULL,
     [SourceFilePath]   NVARCHAR (500)   NOT NULL,
     IsUploadFile       BIT              NULL,
     [JobId]            UNIQUEIDENTIFIER NOT NULL,
