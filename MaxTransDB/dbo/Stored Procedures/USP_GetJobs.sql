@@ -7,13 +7,14 @@
 AS
 BEGIN 
 	SELECT J.*, JS.Description AS StatusName, U.FIrstName + ' ' + U.LastName AS UserName,
-	(SELECT FileName,FileExtension,SourceFilePath FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
+	(SELECT Id,FileName,FileExtension,SourceFilePath, IsUploadFile FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
 	(
 		SELECT COUNT(1) FROM JobNotifications N 
 		WHERE N.JobId = J.Id
 		AND N.CreatedBy != @UserId
 		AND ISNULL(N.IsReadMessage,0) = 0 
-	) AS UnReadMessages
+	) AS UnReadMessages,
+	(SELECT FilePreference FROM Client WHERE UserId = J.CreatedBy AND ISNULL(IsDeleted,0) = 0) AS FilePreference
 	FROM Jobs J
 	JOIN JobStatus JS ON JS.Id = J.Status
 	JOIN Users U ON U.id = J.CreatedBy
