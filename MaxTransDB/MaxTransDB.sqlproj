@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="Save-Job-DbChanges.sql" />
     <None Include="dbo\Data\FileTypesData.sql" />
+    <None Include="DB-Changes-01052024.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Vendor.sql" />
