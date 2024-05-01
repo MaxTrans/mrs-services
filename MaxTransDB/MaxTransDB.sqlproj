@@ -60,9 +60,11 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="dbo\Data" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Save-Job-DbChanges.sql" />
+    <None Include="dbo\Data\FileTypesData.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Vendor.sql" />
@@ -93,5 +95,7 @@
     <Build Include="dbo\User Defined Types\JobFileType.sql" />
     <Build Include="dbo\Stored Procedures\usp_AdminSaveUploadFile.sql" />
     <Build Include="dbo\Stored Procedures\usp_SavePreference.sql" />
+    <Build Include="dbo\Tables\JobHandleTime.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetUploadPreferences.sql" />
   </ItemGroup>
 </Project>

@@ -4,8 +4,7 @@
 	@DefaultTat INT,
 	@IsPDFAllowed BIT,
 	@IsDocAllowed BIT
-	--,
-	--@CreatedBy UNIQUEIDENTIFIER
+	
 AS
 BEGIN
 	

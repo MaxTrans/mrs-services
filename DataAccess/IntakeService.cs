@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessEntity;
 using DataAccess.Base;
+using static DataAccess.Procedures;
 
 namespace DataAccess
 {
@@ -62,6 +63,30 @@ namespace DataAccess
             {
                 return false;
             }
+        }
+
+        public List<UploadPreference> GetUploadTypes(string userId)
+        {
+            var uploadPreferences = new List<UploadPreference>();
+            var allowedFiles = string.Empty;
+            try
+            {
+                this.ProcedureName = Procedures.Jobs.USP_GETUPLOADPREFERENCES;
+                this.AddParameter("@UserId", userId);
+                var dbresult = this.ExecuteReader((dr) => {
+                    uploadPreferences.Add(new UploadPreference
+                    {
+                        Type = dr["Type"].ToStr(),
+                        Selected = dr["Selected"].ToBool()
+                    });
+                });
+
+            }
+            catch
+            {
+                throw;
+            }
+            return uploadPreferences;
         }
 
     }
