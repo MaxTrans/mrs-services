@@ -1,8 +1,4 @@
-﻿
-/****** Object:  StoredProcedure [dbo].[usp_AdminSaveUploadFile]    Script Date: 24-04-2024 23:29:22 ******/
-
-
-CREATE PROCEDURE [dbo].[usp_SavePreferences]
+﻿CREATE PROCEDURE [dbo].[usp_SavePreferences]
 	@UserId UNIQUEIDENTIFIER,
 	@Website VARCHAR(100),
 	@DefaultTat INT,

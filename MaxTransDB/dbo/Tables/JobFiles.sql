@@ -3,6 +3,7 @@
     [FileName]         NVARCHAR (50)    NOT NULL,
     [FileExtension]    VARCHAR (5)      NOT NULL,
     [SourceFilePath]   NVARCHAR (500)   NOT NULL,
+    IsUploadFile       BIT              NULL,
     [JobId]            UNIQUEIDENTIFIER NOT NULL,
     [CreatedBy]        UNIQUEIDENTIFIER NOT NULL,
     [ModifyedBy]       UNIQUEIDENTIFIER NULL,

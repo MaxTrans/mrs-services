@@ -10,6 +10,7 @@
     [City]                  NVARCHAR (50)    NULL,
     [StateId]               INT              NULL,
     [CountryId]             INT              NULL,
+    FilePreference          VARCHAR(50)      NULL,
     [DefaultTAT]            INT              NULL,
     [FilePreferencePDF]     BIT              NULL,
     [FilePreferenceWord]    BIT              NULL,

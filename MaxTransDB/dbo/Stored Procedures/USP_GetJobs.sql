@@ -23,3 +23,4 @@ BEGIN
 	AND (@CreatedBy IS NULL OR J.CreatedBy = @CreatedBy)
 	ORDER BY J.JobId
 END
+
