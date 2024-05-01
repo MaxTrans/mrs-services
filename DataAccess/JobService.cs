@@ -10,6 +10,14 @@ namespace DataAccess
 {
     public class JobService : DataContext
     {
+        public DBResult DeleteJob(string jobId, string userId)
+        {
+            this.ProcedureName = Procedures.Jobs.USP_DELETEJOB;
+            this.AddParameter("@JobId", jobId);
+            this.AddParameter("@UserId", userId);
+            return this.ExecuteNonQuery();
+        }
+
         public List<Job> GetJob(string userId, string jobStatus, string createdBy) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;
