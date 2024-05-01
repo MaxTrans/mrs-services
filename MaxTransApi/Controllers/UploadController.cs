@@ -65,16 +65,19 @@ namespace MaxTransApi.Controllers
                 DataTable dt = new DataTable();
                 dt.Columns.Add("FileName");
                 dt.Columns.Add("FileExtension");
+                dt.Columns.Add("FileId");
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
-
+                
                 foreach (var jobFile in job.UploadFiles)
                 {
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
+                    dr["FileId"] = jobFile.FileId;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = job.CreatedBy;
+                    
                     dt.Rows.Add(dr);
                 }
 
@@ -101,9 +104,11 @@ namespace MaxTransApi.Controllers
                 DataTable dt = new DataTable();
                 dt.Columns.Add("FileName");
                 dt.Columns.Add("FileExtension");
+                dt.Columns.Add("FileId");
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
-                dt.Columns.Add("FileType");
+                
+
 
                 foreach (var jobFile in fileUpload.UploadFiles)
                 {
@@ -112,7 +117,7 @@ namespace MaxTransApi.Controllers
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = fileUpload.CreatedBy;
-                    dr["FileType"] = fileUpload.FileType;
+                    dr["FileId"] = jobFile.FileId.Trim();
                     dt.Rows.Add(dr);
                 }
 

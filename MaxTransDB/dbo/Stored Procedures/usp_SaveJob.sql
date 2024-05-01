@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usp_SaveJob]
+﻿--ALTER TABLE JobFiles ADD FileId VARCHAR(500) NULL
+CREATE PROCEDURE [dbo].[usp_SaveJob]
 	@JobFiles JobFiletype READONLY,
 	@JobName NVARCHAR(50),
 	@Priority UNIQUEIDENTIFIER,
@@ -31,10 +32,11 @@ BEGIN
 
 		   INSERT INTO [dbo].[JobFiles]
 			  (
-				[FileName], FileExtension, SourceFilePath, JobId, CreatedBy
+				[FileName], FileExtension, SourceFilePath, JobId, CreatedBy, FileId
 				,CreatedDateTime
 			  )
-			SELECT [FileName], FileExtension, SourceFilePath, @JobID, CreatedBy, GETUTCDATE()
+			SELECT [FileName], FileExtension, SourceFilePath, @JobID, CreatedBy, FileId
+				,GETUTCDATE()
 			FROM @JobFiles
 
 			IF(ISNULL(@Notes,'') != '')
@@ -47,16 +49,16 @@ BEGIN
 		ELSE
 		BEGIN
 			
-			DECLARE @FileName varchar(100), @FileExtension varchar(50), @SourceFilePath varchar(1000)
+			DECLARE @FileName varchar(100), @FileExtension varchar(50), @SourceFilePath varchar(1000), @FileId VARCHAR(500)
 
 			DECLARE files_cursor CURSOR FOR
-			SELECT FileName, FileExtension, SourceFilePath
+			SELECT FileName, FileExtension, SourceFilePath, FileId
 			FROM @JobFiles
 
 			OPEN files_cursor
 
 			FETCH NEXT FROM files_cursor
-			INTO @FileName, @FileExtension, @SourceFilePath
+			INTO @FileName, @FileExtension, @SourceFilePath, @FileId
 
 			WHILE @@FETCH_STATUS = 0
 			BEGIN
@@ -75,10 +77,11 @@ BEGIN
 
 			   INSERT INTO [dbo].[JobFiles]
 				  (
-					[FileName], FileExtension, SourceFilePath, JobId, CreatedBy
+					[FileName], FileExtension, SourceFilePath, JobId, CreatedBy, FileId
 					,CreatedDateTime
 				  )
-				  VALUES(@FileName, @FileExtension, @SourceFilePath, @NewJobID, @CreatedBy, GETUTCDATE())
+				  VALUES(@FileName, @FileExtension, @SourceFilePath, @NewJobID, @CreatedBy, @FileId
+							,GETUTCDATE())
 
 				  IF(ISNULL(@Notes,'') != '')
 					BEGIN
