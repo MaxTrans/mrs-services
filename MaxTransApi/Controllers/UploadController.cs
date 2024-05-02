@@ -65,10 +65,10 @@ namespace MaxTransApi.Controllers
                 DataTable dt = new DataTable();
                 dt.Columns.Add("FileName");
                 dt.Columns.Add("FileExtension");
-                dt.Columns.Add("FileId");
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
-                
+                dt.Columns.Add("FileId");
+
                 foreach (var jobFile in job.UploadFiles)
                 {
                     var dr = dt.NewRow();
@@ -104,10 +104,9 @@ namespace MaxTransApi.Controllers
                 DataTable dt = new DataTable();
                 dt.Columns.Add("FileName");
                 dt.Columns.Add("FileExtension");
-                dt.Columns.Add("FileId");
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
-                
+                dt.Columns.Add("FileId");
 
 
                 foreach (var jobFile in fileUpload.UploadFiles)
