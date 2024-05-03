@@ -73,13 +73,14 @@ namespace MaxTransApi.Controllers
 
                 foreach (var jobFile in job.UploadFiles)
                 {
+                    FileInfo fileInfo = new FileInfo(jobFile.FileName);
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["FileId"] = jobFile.FileId;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = job.CreatedBy;
-                    dr["PageCount"] = GetPageCount(jobFile.FilePath);
+                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
 
                     dt.Rows.Add(dr);
                 }
@@ -114,14 +115,15 @@ namespace MaxTransApi.Controllers
 
                 foreach (var jobFile in fileUpload.UploadFiles)
                 {
-
+                    FileInfo fileInfo = new FileInfo(jobFile.FileName);
+                    
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = fileUpload.CreatedBy;
                     dr["FileId"] = jobFile.FileId.Trim();
-                    dr["PageCount"] = GetPageCount(jobFile.FilePath);
+                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
                     dt.Rows.Add(dr);
                 }
 
