@@ -26,6 +26,7 @@
         public string FileExtension { get; set; }
         public int Size { get; set; }
         public string FileId { get; set; }
+        public int PageCount { get; set; }  
 
     }
 }
