@@ -65,5 +65,24 @@ namespace DataAccess
             }
         }
 
+        public bool UpdatePageCount(string fileXml)
+        {
+            try
+            {
+                this.ProcedureName = Procedures.Jobs.USP_UPDATEPAGECOUNT;
+                this.AddParameter("@FileXml", fileXml);
+                var result = this.ExecuteNonQuery((cmd) =>
+                {
+
+                });
+
+                return result.IsSuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
