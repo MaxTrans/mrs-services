@@ -13,6 +13,7 @@ using System.Xml;
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
+using iText.Kernel.Pdf;
 
 
 namespace MaxTransApi.Controllers
@@ -68,21 +69,24 @@ namespace MaxTransApi.Controllers
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
                 dt.Columns.Add("FileId");
+                dt.Columns.Add("PageCount");
 
                 foreach (var jobFile in job.UploadFiles)
                 {
+                    FileInfo fileInfo = new FileInfo(jobFile.FileName);
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["FileId"] = jobFile.FileId;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = job.CreatedBy;
-                    
+                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
+
                     dt.Rows.Add(dr);
                 }
 
-                
-                var output = new UploadService().SaveJob(dt, job.MergeFilename , job.Tat, job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
+
+                var output = new UploadService().SaveJob(dt, job.MergeFilename, job.Tat, job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
                 result.Data = output;
                 result.IsSuccess = true;
                 return Ok(result);
@@ -90,7 +94,7 @@ namespace MaxTransApi.Controllers
             catch (Exception ex)
             {
                 result.Data = $"{ex.Message}  Stack Trace: {ex.StackTrace}";
-                result.IsSuccess = false;   
+                result.IsSuccess = false;
                 return BadRequest(result);
             }
         }
@@ -107,15 +111,19 @@ namespace MaxTransApi.Controllers
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
                 dt.Columns.Add("FileId");
+                dt.Columns.Add("PageCount");
 
                 foreach (var jobFile in fileUpload.UploadFiles)
                 {
+                    FileInfo fileInfo = new FileInfo(jobFile.FileName);
+                    
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = fileUpload.CreatedBy;
                     dr["FileId"] = jobFile.FileId.Trim();
+                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
                     dt.Rows.Add(dr);
                 }
 
@@ -132,5 +140,23 @@ namespace MaxTransApi.Controllers
             }
         }
 
+        
+        private int GetPageCount(string pdfFilePath)
+        {
+            try
+            {
+                using (var pdfReader = new PdfReader(pdfFilePath))
+                {
+                    using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
+                    {
+                        return pdfDocument.GetNumberOfPages();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return -1; // Return -1 to indicate an error
+            }
+        }
     }
 }
