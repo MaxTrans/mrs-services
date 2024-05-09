@@ -33,5 +33,6 @@ namespace BusinessEntity
         public string UserName { get; set; }
         public int UnReadMessages { get; set; }
         public string FilePreference { get; set; }
+        public string Tat { get; set; }
     }
 }
