@@ -52,6 +52,7 @@ namespace DataAccess
                     UserName = dr["UserName"].ToStr(),
                     UnReadMessages = dr["UnReadMessages"].ToInt(),
                     FilePreference = dr["FilePreference"].ToStr(),
+                    Tat = dr["Tat"].ToStr(),
                 });
             });
 
@@ -60,3 +61,4 @@ namespace DataAccess
 
     }
 }
+

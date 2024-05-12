@@ -80,7 +80,6 @@ namespace MaxTransApi.Controllers
                     dr["FileId"] = jobFile.FileId;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = job.CreatedBy;
-                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
 
                     dt.Rows.Add(dr);
                 }
@@ -89,6 +88,7 @@ namespace MaxTransApi.Controllers
                 var output = new UploadService().SaveJob(dt, job.MergeFilename, job.Tat, job.Comment, job.UploadType, job.CompanyId, job.CreatedBy);
                 result.Data = output;
                 result.IsSuccess = true;
+                GetPageCountForUploadFiles(job.UploadFiles);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -111,25 +111,26 @@ namespace MaxTransApi.Controllers
                 dt.Columns.Add("SourceFilePath");
                 dt.Columns.Add("CreatedBy");
                 dt.Columns.Add("FileId");
-                dt.Columns.Add("PageCount");
+                
 
                 foreach (var jobFile in fileUpload.UploadFiles)
                 {
                     FileInfo fileInfo = new FileInfo(jobFile.FileName);
-                    
+
                     var dr = dt.NewRow();
                     dr["FileName"] = jobFile.FileName;
                     dr["FileExtension"] = jobFile.FileExtension;
                     dr["SourceFilePath"] = jobFile.FilePath;
                     dr["CreatedBy"] = fileUpload.CreatedBy;
                     dr["FileId"] = jobFile.FileId.Trim();
-                    dr["PageCount"] = fileInfo.Extension == ".pdf" ? GetPageCount(jobFile.FilePath) : 0;
+                  
                     dt.Rows.Add(dr);
                 }
 
                 var output = new UploadService().SaveAdminFileUpload(dt, fileUpload.JobId, fileUpload.CreatedBy);
                 result.Data = output;
                 result.IsSuccess = true;
+                GetPageCountForUploadFiles(fileUpload.UploadFiles);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -140,23 +141,47 @@ namespace MaxTransApi.Controllers
             }
         }
 
-        
-        private int GetPageCount(string pdfFilePath)
+        private void GetPageCountForUploadFiles(UploadFileModal[] uploadFiles)
         {
+            Task? longRunningTask = null;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<Files>");
             try
             {
-                using (var pdfReader = new PdfReader(pdfFilePath))
-                {
-                    using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
-                    {
-                        return pdfDocument.GetNumberOfPages();
-                    }
-                }
+                longRunningTask = Task.Run(() =>
+                 {
+                     for (int i = 0; i < uploadFiles.Length; i++)
+                     {
+                         var file = uploadFiles[i];
+                         var fileInfo = new FileInfo(file.FileName);
+                         if (fileInfo.Extension == ".pdf")
+                         {
+                             using (var pdfReader = new PdfReader(file.FilePath))
+                             {
+                                 using (PdfDocument pdfDocument = new PdfDocument(pdfReader))
+                                 {
+                                     int pageCount = pdfDocument.GetNumberOfPages();
+                                     sb.AppendLine($"<FileInfo id=\"{file.FileId}\" pageCount=\"{pageCount}\" />");
+                                 }
+                             }
+                         }
+                     }
+                     sb.AppendLine("</Files>");
+                     var output = new UploadService().UpdatePageCount(sb.ToString());
+
+                 });
+
+                longRunningTask.Start();
             }
             catch (Exception ex)
             {
-                return -1; // Return -1 to indicate an error
+            }
+            finally {
+                if (longRunningTask != null && longRunningTask.IsCompleted)
+                    longRunningTask.Dispose();
             }
         }
+
+        
     }
 }

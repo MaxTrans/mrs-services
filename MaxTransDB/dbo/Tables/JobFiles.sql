@@ -10,6 +10,7 @@
     [ModifyedBy]       UNIQUEIDENTIFIER NULL,
     [CreatedDateTime]  DATETIME         NOT NULL,
     [ModifiedDateTime] DATETIME         NULL,
+    [PageCount]        INT              NULL, 
     CONSTRAINT [PK_JobFiles] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
