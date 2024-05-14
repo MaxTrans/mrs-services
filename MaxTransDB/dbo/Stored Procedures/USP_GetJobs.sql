@@ -1,7 +1,7 @@
-﻿--EXEC [dbo].[USP_GetJobs] NULL, NULL, 'cb5d5a27-2220-4635-8b7e-a7396333a46e'
+﻿--EXEC [dbo].[USP_GetJobs] '12f5b379-a6e9-48a2-81e2-6e7249b4895e,fab98251-70c2-410b-bc09-9b66f9234e30', NULL, '6b535790-9dea-4c17-aa04-fe599c0fba62'
 CREATE PROCEDURE [dbo].[USP_GetJobs]
 (
-	@JobStatus UNIQUEIDENTIFIER = NULL,
+	@JobStatus VARCHAR(250) = NULL,
 	@CreatedBy UNIQUEIDENTIFIER = NULL,
 	@UserId UNIQUEIDENTIFIER
 )
@@ -23,7 +23,9 @@ BEGIN
 	JOIN Users U ON U.id = J.CreatedBy
 	JOIN JobHandleTime JHT ON J.Priority = JHT.Id
 	WHERE ISNULL(J.IsDeleted, 0) = 0
-	AND (@JobStatus IS NULL OR J.Status = @JobStatus)
+	AND (@JobStatus IS NULL OR J.Status IN( SELECT value
+										FROM STRING_SPLIT(@JobStatus, ',')))
 	AND (@CreatedBy IS NULL OR J.CreatedBy = @CreatedBy)
 	ORDER BY J.JobId
 END
+
