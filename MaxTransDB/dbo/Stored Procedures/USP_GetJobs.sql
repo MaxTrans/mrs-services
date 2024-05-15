@@ -10,7 +10,7 @@ BEGIN
 	SELECT J.*, JS.Description AS StatusName, U.FIrstName + ' ' + U.LastName AS UserName,
 	CASE WHEN CHARINDEX('Hours',JHT.[Description],0) = 0 THEN CAST(CAST(SUBSTRING(JHT.[Description],0,2) AS INT) * 24 AS VARCHAR) + ' Hours'
 		 ELSE  JHT.[Description] END AS 'Tat',
-	(SELECT Id,FileName,FileExtension,SourceFilePath, IsUploadFile FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
+	(SELECT Id,FileName,FileExtension,SourceFilePath, IsUploadFile,[PageCount] FROM JobFiles WHERE JobId = J.Id FOR JSON PATH, ROOT ('JobFiles')) AS JobFiles,
 	(
 		SELECT COUNT(1) FROM JobNotifications N 
 		WHERE N.JobId = J.Id
