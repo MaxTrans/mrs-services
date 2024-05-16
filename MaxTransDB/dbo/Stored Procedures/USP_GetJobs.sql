@@ -25,5 +25,5 @@ BEGIN
 	WHERE ISNULL(J.IsDeleted, 0) = 0
 	AND (@JobStatus IS NULL OR J.Status = @JobStatus)
 	AND (@CreatedBy IS NULL OR J.CreatedBy = @CreatedBy)
-	ORDER BY J.JobId
+	ORDER BY J.JobId DESC
 END
