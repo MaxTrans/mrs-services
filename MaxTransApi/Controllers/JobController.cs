@@ -33,11 +33,11 @@ namespace MaxTransApi.Controllers
 
         [HttpGet]
         [Route("deletejob")]
-        public async Task<IActionResult> DeleteJob(string jobId, string userId)
+        public async Task<IActionResult> DeleteJob(string jobId, string userId, string status)
         {
             try
             {
-                var res = new JobService().DeleteJob(jobId, userId);
+                var res = new JobService().DeleteJob(jobId, userId, status);
                 return Ok(new ApiResult
                 {
                     Data = res.ResultCount,

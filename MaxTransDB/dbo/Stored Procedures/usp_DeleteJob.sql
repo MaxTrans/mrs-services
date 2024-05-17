@@ -1,10 +1,16 @@
 ﻿CREATE PROCEDURE usp_DeleteJob
 (
 	@JobId UNIQUEIDENTIFIER,
-	@UserId UNIQUEIDENTIFIER
+	@UserId UNIQUEIDENTIFIER,
+	@Status VARCHAR(15)
 )
 AS
 BEGIN
-	UPDATE Jobs SET IsDeleted = 1,ModifyedBy = @UserId, ModifiedDateTime = GETUTCDATE()
-	WHERE Id = @JobId
+	
+	DECLARE @StatusId UNIQUEIDENTIFIER 
+	SELECT @StatusId = Id FROM JobStatus WHERE Description = @Status
+
+	IF @StatusId IS NOT NULL
+		UPDATE Jobs SET Status = @StatusId ,ModifyedBy = @UserId, ModifiedDateTime = GETUTCDATE()
+		WHERE Id = @JobId
 END

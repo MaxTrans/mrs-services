@@ -1,5 +1,4 @@
-﻿--ALTER TABLE JobFiles ADD FileId VARCHAR(500) NULL
-CREATE PROCEDURE [dbo].[usp_SaveJob]
+﻿CREATE PROCEDURE [dbo].[usp_SaveJob]
 	@JobFiles JobFiletype READONLY,
 	@JobName NVARCHAR(50),
 	@Priority UNIQUEIDENTIFIER,
@@ -90,7 +89,7 @@ BEGIN
 					END
 			
 				FETCH NEXT FROM files_cursor
-				INTO @FileName, @FileExtension, @SourceFilePath
+				INTO @FileName, @FileExtension, @SourceFilePath, @FileId
 			END
 		
 			CLOSE files_cursor;
