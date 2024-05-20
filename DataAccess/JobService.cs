@@ -10,12 +10,15 @@ namespace DataAccess
 {
     public class JobService : DataContext
     {
-        public List<Job> GetJob(string userId, string jobStatus, string createdBy) 
+        public List<Job> GetJob(string userId, string jobStatus, string createdBy, string filename, string fromDate, string toDate) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;
             this.AddParameter("@JobStatus", jobStatus);
             this.AddParameter("@CreatedBy", createdBy);
             this.AddParameter("@UserId", userId);
+            this.AddParameter("@Filename", filename);
+            this.AddParameter("@FromDate", fromDate);
+            this.AddParameter("@ToDate", toDate);
 
             var jobs = new List<Job>();
 
