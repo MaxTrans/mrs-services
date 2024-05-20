@@ -15,6 +15,7 @@ namespace DataAccess
             public const string USP_ADMINSAVEUPLOADFILE = "usp_AdminSaveUploadFile";
             public const string USP_GETUPLOADPREFERENCES = "usp_GetUploadPreferences";
             public const string USP_UPDATEPAGECOUNT = "usp_UpdatePageCount";
+            public const string USP_DELETEJOB = "usp_DeleteJob";
         }
 
         public static class LookUp

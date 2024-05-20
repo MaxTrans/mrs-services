@@ -29,7 +29,30 @@ namespace MaxTransApi.Controllers
                     Message = ex.Message
                 });
             }
-            
+        }
+
+        [HttpGet]
+        [Route("deletejob")]
+        public async Task<IActionResult> DeleteJob(string jobId, string userId, string status)
+        {
+            try
+            {
+                var res = new JobService().DeleteJob(jobId, userId, status);
+                return Ok(new ApiResult
+                {
+                    Data = res.ResultCount,
+                    IsSuccess = res.IsSuccess
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult
+                {
+                    Data = null,
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
         }
     }
 }

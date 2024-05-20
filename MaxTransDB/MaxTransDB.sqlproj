@@ -101,5 +101,6 @@
     <Build Include="dbo\Stored Procedures\usp_SavePreference.sql" />
     <Build Include="dbo\Tables\JobHandleTime.sql" />
     <Build Include="dbo\Stored Procedures\usp_UpdatePageCount.sql" />
+    <Build Include="dbo\Stored Procedures\usp_DeleteJob.sql" />
   </ItemGroup>
 </Project>

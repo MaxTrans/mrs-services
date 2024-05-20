@@ -6,7 +6,7 @@ AS
 BEGIN
 	IF @Type = 'status'
 	BEGIN
-		select Id, Description AS Value from JobStatus
+		select Id, Description AS Value from JobStatus ORDER BY OrderSqe
 	END
 	ELSE IF @Type = 'tat'
 	BEGIN

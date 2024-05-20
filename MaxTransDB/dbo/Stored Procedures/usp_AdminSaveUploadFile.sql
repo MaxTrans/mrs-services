@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]
+﻿ALTER PROCEDURE [dbo].[usp_AdminSaveUploadFile]
 	@JobFiles JobFiletype READONLY,
 	@JobId UNIQUEIDENTIFIER,
 	@CreatedBy UNIQUEIDENTIFIER
@@ -10,29 +9,43 @@ BEGIN
 	DECLARE @FileExtension VARCHAR(5)
 	SELECT @FileExtension = FileExtension FROM @JobFiles 
 
-	IF NOT EXISTS(SELECT * FROM JobFiles WHERE JobId = @JobId AND FileExtension = @FileExtension)
+	IF NOT EXISTS(SELECT * FROM JobFiles WHERE JobId = @JobId AND FileExtension = @FileExtension AND IsUploadFile = 1)
 	BEGIN
 		INSERT INTO [dbo].[JobFiles]
 			(
-				[FileName], FileExtension, SourceFilePath, JobId, CreatedBy
+				[FileName], FileExtension, SourceFilePath, JobId, CreatedBy, FileId
 				,CreatedDateTime,IsUploadFile
 			)
-		SELECT [FileName], FileExtension, SourceFilePath, @JobId, CreatedBy, GETUTCDATE(),1
+		SELECT [FileName], FileExtension, SourceFilePath, @JobId, CreatedBy, FileId
+				,GETUTCDATE(),1
 		FROM @JobFiles
 
-		DECLARE @JobStatus UNIQUEIDENTIFIER 
-		SELECT @JobStatus = Id FROM JobStatus WHERE Description = 'Completed'
+		DECLARE @UserId UNIQUEIDENTIFIER
+		DECLARE @Preference VARCHAR(200) 
+		DECLARE @PreferenceCount INT
+		DECLARE @FileCount INT
 
-		UPDATE Jobs SET Status = @JobStatus 
-		WHERE Id = @JobId
+		SELECT @UserId = CreatedBy FROM Jobs WHERE Id = @JobId
+		SELECT @Preference = FilePreference FROM Client WHERE UserId = @UserId
+		SELECT @PreferenceCount = COUNT(1) FROM STRING_SPLIT( @Preference , ',')
+		SELECT @FileCount = COUNT(1) FROM JobFiles WHERE JobId = @JobId AND IsUploadFile = 1
+
+		IF @PreferenceCount <= @FileCount
+		BEGIN
+			DECLARE @JobStatus UNIQUEIDENTIFIER 
+			SELECT @JobStatus = Id FROM JobStatus WHERE Description = 'Completed'
+
+			UPDATE Jobs SET Status = @JobStatus 
+			WHERE Id = @JobId
+		END
 	END
 	ELSE
 	BEGIN 
 		UPDATE JobFiles SET FileName = TJF.FileName, FileExtension = TJF.FileExtension, SourceFilePath = TJF.SourceFilePath,
-							ModifyedBy = @CreatedBy, ModifiedDateTime = GETUTCDATE(), IsUploadFile = 1
+							ModifyedBy = @CreatedBy, ModifiedDateTime = GETUTCDATE(), IsUploadFile = 1, FileId = TJF.FileId
 		FROM JobFiles JF 
 		JOIN @JobFiles TJF ON JF.JobId = @JobId AND JF.FileExtension = @FileExtension
-		WHERE JF.JobId = @JobId 
+		WHERE JF.JobId = @JobId AND IsUploadFile = 1
 	END
 		
 		
