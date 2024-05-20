@@ -1,5 +1,4 @@
-﻿--EXEC [dbo].[USP_GetJobs] '12f5b379-a6e9-48a2-81e2-6e7249b4895e,fab98251-70c2-410b-bc09-9b66f9234e30', NULL, '6b535790-9dea-4c17-aa04-fe599c0fba62',NULL, '2024-05-01','2024-05-01'
-CREATE PROCEDURE [dbo].[USP_GetJobs]
+﻿CREATE PROCEDURE [dbo].[USP_GetJobs]
 (
 	@JobStatus VARCHAR(250) = NULL,
 	@CreatedBy UNIQUEIDENTIFIER = NULL,
@@ -23,7 +22,6 @@ BEGIN
 	) AS UnReadMessages,
 	(SELECT FilePreference FROM Client WHERE UserId = J.CreatedBy AND ISNULL(IsDeleted,0) = 0) AS FilePreference
 	FROM Jobs J
-	JOIN JobFiles JF ON J.Id = JF.JobId
 	JOIN JobStatus JS ON JS.Id = J.Status
 	JOIN Users U ON U.id = J.CreatedBy
 	JOIN JobHandleTime JHT ON J.Priority = JHT.Id
@@ -31,7 +29,7 @@ BEGIN
 	AND (@JobStatus IS NULL OR J.Status IN( SELECT value
 										FROM STRING_SPLIT(@JobStatus, ',')))
 	AND (@CreatedBy IS NULL OR J.CreatedBy = @CreatedBy)
-	AND (@Filename IS NULL OR JF.[FileName] LIKE @FileName + '%')
+	AND (@Filename IS NULL OR J.Name LIKE @FileName + '%')
 	AND (@FromDate IS NULL OR CAST(J.CreatedDateTime AS DATE) >= @FromDate)
 	AND (@ToDate IS NULL OR CAST(J.CreatedDateTime AS DATE) <= @ToDate)
 	ORDER BY J.JobId

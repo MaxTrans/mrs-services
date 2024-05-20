@@ -18,8 +18,6 @@ namespace DataAccess
             this.AddParameter("@Status", status);
             return this.ExecuteNonQuery();
         }
-
-        public List<Job> GetJob(string userId, string jobStatus, string createdBy) 
         public List<Job> GetJob(string userId, string jobStatus, string createdBy, string filename, string fromDate, string toDate) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;

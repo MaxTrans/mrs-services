@@ -16,6 +16,7 @@
     [FilePreferencePDFLink] BIT              NULL,
     [ClientLogo]            VARCHAR (50)     NULL,
     [IsDeleted]             BIT              NULL,
+    FilePreference          VARCHAR(50)      NULL,
     [CreatedBy]             UNIQUEIDENTIFIER NOT NULL,
     [ModifyedBy]            UNIQUEIDENTIFIER NULL,
     [CreatedDateTime]       DATETIME         NOT NULL,

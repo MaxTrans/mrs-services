@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE [dbo].[usp_AdminSaveUploadFile]
+﻿CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]
 	@JobFiles JobFiletype READONLY,
 	@JobId UNIQUEIDENTIFIER,
 	@CreatedBy UNIQUEIDENTIFIER
