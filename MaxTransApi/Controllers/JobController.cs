@@ -54,5 +54,29 @@ namespace MaxTransApi.Controllers
                 });
             }
         }
+
+        [HttpGet]
+        [Route("updateJobStatus")]
+        public async Task<IActionResult> UpdateJobStatus(string jobId, string userId, string status)
+        {
+            try
+            {
+                var res = new JobService().UpdateJobStatus(jobId, userId, status);
+                return Ok(new ApiResult
+                {
+                    Data = res.ResultCount,
+                    IsSuccess = res.IsSuccess
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult
+                {
+                    Data = null,
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
+        }
     }
 }

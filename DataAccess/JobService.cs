@@ -18,6 +18,16 @@ namespace DataAccess
             this.AddParameter("@Status", status);
             return this.ExecuteNonQuery();
         }
+
+        public DBResult UpdateJobStatus(string jobId, string userId, string status)
+        {
+            this.ProcedureName = Procedures.Jobs.USP_UPDATE_JOBSTATUS;
+            this.AddParameter("@JobId", jobId);
+            this.AddParameter("@UserId", userId);
+            this.AddParameter("@Status", status);
+            return this.ExecuteNonQuery();
+        }
+
         public List<Job> GetJob(string userId, string jobStatus, string createdBy, string filename, string fromDate, string toDate) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;
