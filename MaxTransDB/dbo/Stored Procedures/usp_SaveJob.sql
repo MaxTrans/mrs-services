@@ -1,6 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[usp_SaveJob]
+﻿
+
+CREATE PROCEDURE [dbo].[usp_SaveJob]
 	@JobFiles JobFiletype READONLY,
-	@JobName NVARCHAR(50),
+	@JobName NVARCHAR(250),
 	@Priority UNIQUEIDENTIFIER,
 	@Notes NVARCHAR(50),
 	@IsSingleJob BIT,

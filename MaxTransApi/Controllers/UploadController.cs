@@ -169,8 +169,6 @@ namespace MaxTransApi.Controllers
                      var output = new UploadService().UpdatePageCount(sb.ToString());
 
                  });
-
-                longRunningTask.Start();
             }
             catch (Exception ex)
             {

@@ -69,6 +69,8 @@
     <None Include="DB-Changes-PDFLNK.sql" />
     <None Include="FileTypeChanges-02052024.sql" />
     <None Include="PageCount-Changes.sql" />
+    <None Include="DBChanges_FileName.sql" />
+    <None Include="GetJobs_CompletedLast_05252024.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Vendor.sql" />
