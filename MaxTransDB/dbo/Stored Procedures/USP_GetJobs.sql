@@ -52,7 +52,7 @@ BEGIN
 		JOIN JobStatus JS ON JS.Id = J.Status
 		JOIN Users U ON U.id = J.CreatedBy
 		JOIN JobHandleTime JHT ON J.Priority = JHT.Id
-		WHERE CAST(J.CreatedDateTime AS DATE) BETWEEN CAST(DATEADD(M,-1,GETDATE()) AS DATE) AND CAST(GETDATE() AS DATE)
+		WHERE CAST(J.CreatedDateTime AS DATE) BETWEEN CAST(DATEADD(WK,-2,GETDATE()) AS DATE) AND CAST(GETDATE() AS DATE)
 		AND ISNULL(J.IsDeleted, 0) = 0 AND J.[Status] = '12F5B379-A6E9-48A2-81E2-6E7249B4895E'
 		) T
 
@@ -64,9 +64,8 @@ BEGIN
 		AND (@ToDate IS NULL OR CAST(T.CreatedDateTime AS DATE) <= @ToDate)
 
 		ORDER BY 
-		--CASE WHEN T.StatusName != 'Completed' THEN T.JobId END DESC,
-		--CASE WHEN T.StatusName = 'Completed' THEN 999999 END
-		T.JobId
+		CASE WHEN T.StatusName != 'Completed' THEN T.JobId END DESC,
+		CASE WHEN T.StatusName = 'Completed' THEN 999999 END
 	END
 	ELSE 
 	BEGIN
