@@ -28,7 +28,7 @@ namespace DataAccess
             return this.ExecuteNonQuery();
         }
 
-        public List<Job> GetJob(string userId, string jobStatus, string createdBy, string filename, string fromDate, string toDate) 
+        public List<Job> GetJob(string userId, string jobStatus, string createdBy, string filename, string fromDate, string toDate, bool initialLoad) 
         {
             this.ProcedureName = Procedures.Jobs.USP_GETJOBS;
             this.AddParameter("@JobStatus", jobStatus);
@@ -37,6 +37,7 @@ namespace DataAccess
             this.AddParameter("@Filename", filename);
             this.AddParameter("@FromDate", fromDate);
             this.AddParameter("@ToDate", toDate);
+            this.AddParameter("@InitialLoad", initialLoad);
 
             var jobs = new List<Job>();
 
