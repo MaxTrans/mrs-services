@@ -1,10 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[usp_SavePreferences]
+﻿
+CREATE PROCEDURE [dbo].[usp_SavePreferences]
 	@UserId UNIQUEIDENTIFIER,
 	@Website VARCHAR(100),
 	@DefaultTat INT,
 	@IsPDFAllowed BIT,
 	@IsDocAllowed BIT
-	
+	--,
+	--@CreatedBy UNIQUEIDENTIFIER
 AS
 BEGIN
 	

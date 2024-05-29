@@ -105,5 +105,7 @@
     <Build Include="dbo\Stored Procedures\usp_UpdatePageCount.sql" />
     <Build Include="dbo\Stored Procedures\usp_DeleteJob.sql" />
     <Build Include="dbo\Stored Procedures\usp_UpdateJobStatus.sql" />
+    <Build Include="dbo\Stored Procedures\usp_GetClients.sql" />
+    <Build Include="dbo\Stored Procedures\usp_UpdatePassword.sql" />
   </ItemGroup>
 </Project>

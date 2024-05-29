@@ -9,6 +9,7 @@ namespace MaxTransApi.Models
         public bool IsPdfAllowed { get; set; }
         public bool IsDocAllowed { get; set; }
         public string UserId { get; set; }
+        public string? Password { get; set; }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessEntity;
 using DataAccess;
+using MaxTransApi.Helpers;
 using MaxTransApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace MaxTransApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModal user)
         {
 
-            var userInfo = new LoginService().VerifyLogin(user.Username, user.Password); 
+            var userInfo = new LoginService().VerifyLogin(user.Username, AesEncryption.Encrypt(user.Password)); 
 
             if (userInfo != null && !string.IsNullOrEmpty(userInfo.Id))
             {

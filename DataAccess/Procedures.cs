@@ -34,6 +34,8 @@ namespace DataAccess
         public static class User
         {
             public const string USP_SAVEPREFERENCES = "usp_SavePreferences";
+            public const string USP_GETCLIENTS = "usp_GetClients";
+            public const string USP_UPDATEPASSWORD = "usp_UpdatePassword";
         }
     }
 }
