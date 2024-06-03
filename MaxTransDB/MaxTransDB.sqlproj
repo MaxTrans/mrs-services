@@ -61,6 +61,7 @@
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
     <Folder Include="dbo\Data" />
+    <Folder Include="dbo\Functions" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Save-Job-DbChanges.sql" />
@@ -107,5 +108,7 @@
     <Build Include="dbo\Stored Procedures\usp_UpdateJobStatus.sql" />
     <Build Include="dbo\Stored Procedures\usp_GetClients.sql" />
     <Build Include="dbo\Stored Procedures\usp_UpdatePassword.sql" />
+    <Build Include="dbo\Functions\fn_GetJobStatus.sql" />
+    <Build Include="dbo\Stored Procedures\usp_MergeJobs.sql" />
   </ItemGroup>
 </Project>

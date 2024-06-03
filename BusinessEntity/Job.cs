@@ -34,5 +34,14 @@ namespace BusinessEntity
         public int UnReadMessages { get; set; }
         public string FilePreference { get; set; }
         public string Tat { get; set; }
+
+        
+    }
+
+    public class MergeJob
+    {
+        public List<string> JobIds { get; set; }
+        public string CompanyId { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

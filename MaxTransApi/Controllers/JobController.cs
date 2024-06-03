@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BusinessEntity;
+using DataAccess;
 using MaxTransApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +43,30 @@ namespace MaxTransApi.Controllers
                 {
                     Data = res.ResultCount,
                     IsSuccess = res.IsSuccess
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ApiResult
+                {
+                    Data = null,
+                    IsSuccess = false,
+                    Message = ex.Message
+                });
+            }
+        }
+
+        [HttpPost]
+        [Route("mergejobs")]
+        public async Task<IActionResult> MergeJobs(MergeJob job)
+        {
+            try
+            {
+                var res = new JobService().MergeJobs(string.Join(",", job.JobIds), job.CreatedBy, job.CompanyId);
+                return Ok(new ApiResult
+                {
+                    Data = res.ResultCount,
+                    IsSuccess = true
                 });
             }
             catch (Exception ex)

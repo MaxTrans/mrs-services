@@ -91,6 +91,6 @@ BEGIN
 		AND (@Filename IS NULL OR J.Name LIKE @FileName + '%')
 		AND (@FromDate IS NULL OR CAST(J.CreatedDateTime AS DATE) >= @FromDate)
 		AND (@ToDate IS NULL OR CAST(J.CreatedDateTime AS DATE) <= @ToDate)
-		ORDER BY J.JobId
+		ORDER BY J.JobId DESC
 	END
 END
