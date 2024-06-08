@@ -72,6 +72,7 @@
     <None Include="PageCount-Changes.sql" />
     <None Include="DBChanges_FileName.sql" />
     <None Include="GetJobs_CompletedLast_05252024.sql" />
+    <None Include="Maxtran_Dev_Data.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Vendor.sql" />
@@ -110,7 +111,6 @@
     <Build Include="dbo\Stored Procedures\usp_UpdatePassword.sql" />
     <Build Include="dbo\Functions\fn_GetJobStatus.sql" />
     <Build Include="dbo\Stored Procedures\usp_MergeJobs.sql" />
-    <Build Include="Maxtran_Dev_Data.sql" />
     <Build Include="Maxtran_Dev_Relationship.sql" />
   </ItemGroup>
 </Project>

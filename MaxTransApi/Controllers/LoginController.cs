@@ -77,30 +77,23 @@ namespace MaxTransApi.Controllers
 
         [HttpPost]
         [Route("refresh-token")]
-        public async Task<IActionResult> RefreshToken(TokenModel tokenModel)
-            {
-            if (tokenModel is null)
+        public async Task<IActionResult> RefreshToken([FromBody] User user)
+        { 
+            if (user is null)
             {
                 return BadRequest("Invalid client request");
             }
 
-            string? accessToken = tokenModel.AccessToken;
-            string? refreshToken = tokenModel.RefreshToken;
+            string? accessToken = user.Token;
+            string? refreshToken = user.RefreshToken;
 
             var principal = GetPrincipalFromExpiredToken(accessToken);
+
             if (principal == null)
             {
                 return BadRequest("Invalid access token or refresh token");
             }
 
-
-            string username = principal.Identity.Name;
-
-
-            //var user = await _userManager.FindByNameAsync(username);
-            var user = new User() { LoginName = "test", Password = "pass", RefreshToken = refreshToken };
-
-            //if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
             if (user == null || user.RefreshToken != refreshToken)
             {
                 return BadRequest("Invalid access token or refresh token");
@@ -109,13 +102,13 @@ namespace MaxTransApi.Controllers
             var newAccessToken = CreateToken(principal.Claims.ToList());
             var newRefreshToken = GenerateRefreshToken();
 
+            user.Token = new JwtSecurityTokenHandler().WriteToken(newAccessToken);
             user.RefreshToken = newRefreshToken;
-            //await _userManager.UpdateAsync(user);
 
-            return new ObjectResult(new
+            return Ok(new ApiResult
             {
-                accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
-                refreshToken = newRefreshToken
+                Data = user,
+                IsSuccess = true
             });
         }
        

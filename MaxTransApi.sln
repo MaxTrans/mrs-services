@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxTransApi", "MaxTransApi\
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MaxTransDB", "MaxTransDB\MaxTransDB.sqlproj", "{21029A71-FAFC-4331-BD23-571D80AF3884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1BEBAAEC-5DBE-43DD-A4C6-3E55E1BBFC44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1BEBAAEC-5DBE-43DD-A4C6-3E55E1BBFC44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessEntity", "BusinessEntity\BusinessEntity.csproj", "{297B1E79-769D-4B8F-A058-614237D1A476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessEntity", "BusinessEntity\BusinessEntity.csproj", "{297B1E79-769D-4B8F-A058-614237D1A476}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,7 +22,6 @@ Global
 		{2A2C3DB9-447F-4F22-993A-2F4BED69511B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A2C3DB9-447F-4F22-993A-2F4BED69511B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21029A71-FAFC-4331-BD23-571D80AF3884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21029A71-FAFC-4331-BD23-571D80AF3884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21029A71-FAFC-4331-BD23-571D80AF3884}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{21029A71-FAFC-4331-BD23-571D80AF3884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21029A71-FAFC-4331-BD23-571D80AF3884}.Release|Any CPU.Build.0 = Release|Any CPU

@@ -1,6 +1,4 @@
-USE [Maxtran_Dev]
-GO
-INSERT [dbo].[Company] ([Id], [Name], [Url], [SmallLogo], [LoginLogo], [HeaderTitle], [IsDeleted], [CreatedBy], [ModifyedBy], [CreatedDateTime], [ModifiedDateTime]) VALUES (N'4c82bf3c-fc5e-4405-a5e6-a441c43bed73', N'Test Company', N'', N'', N'          ', N'Test Company', 0, N'6b535790-9dea-4c17-aa04-fe599c0fba62', NULL, CAST(N'2024-03-16T12:09:10.993' AS DateTime), NULL)
+﻿INSERT [dbo].[Company] ([Id], [Name], [Url], [SmallLogo], [LoginLogo], [HeaderTitle], [IsDeleted], [CreatedBy], [ModifyedBy], [CreatedDateTime], [ModifiedDateTime]) VALUES (N'4c82bf3c-fc5e-4405-a5e6-a441c43bed73', N'Test Company', N'', N'', N'          ', N'Test Company', 0, N'6b535790-9dea-4c17-aa04-fe599c0fba62', NULL, CAST(N'2024-03-16T12:09:10.993' AS DateTime), NULL)
 GO
 INSERT [dbo].[JobHandleTime] ([Id], [Description], [IsDeleted], [CreatedBy], [ModifyedBy], [CreatedDateTime], [ModifiedDateTime], [SortOrder]) VALUES (N'92f64838-d8a3-48e4-8e2a-385a9751326e', N'2 Days', 0, N'6b535790-9dea-4c17-aa04-fe599c0fba62', NULL, CAST(N'2024-04-27T08:29:14.773' AS DateTime), NULL, 2)
 GO

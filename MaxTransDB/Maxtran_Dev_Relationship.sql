@@ -9,10 +9,7 @@ CREATE TYPE [dbo].[JobFileType] AS TABLE(
 )
 GO
 /****** Object:  UserDefinedFunction [dbo].[fn_GetJobStatus]    Script Date: 08-06-2024 19:57:19 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE FUNCTION [dbo].[fn_GetJobStatus] 
 (
 	-- Add the parameters for the function here
@@ -32,10 +29,7 @@ BEGIN
 END
 GO
 /****** Object:  Table [dbo].[AppSettings]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[AppSettings](
 	[Id] [uniqueidentifier] NOT NULL,
 	[CompanyId] [uniqueidentifier] NOT NULL,
@@ -51,10 +45,7 @@ CREATE TABLE [dbo].[AppSettings](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Client]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Client](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -85,10 +76,7 @@ CREATE TABLE [dbo].[Client](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Company]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Company](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
@@ -108,10 +96,7 @@ CREATE TABLE [dbo].[Company](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[FileTypes]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[FileTypes](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
@@ -128,10 +113,7 @@ CREATE TABLE [dbo].[FileTypes](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[JobFiles]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[JobFiles](
 	[Id] [uniqueidentifier] NOT NULL,
 	[FileName] [nvarchar](250) NULL,
@@ -152,10 +134,7 @@ CREATE TABLE [dbo].[JobFiles](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[JobHandleTime]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[JobHandleTime](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
@@ -172,10 +151,7 @@ CREATE TABLE [dbo].[JobHandleTime](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[JobNotifications]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[JobNotifications](
 	[Id] [uniqueidentifier] NOT NULL,
 	[JobId] [uniqueidentifier] NOT NULL,
@@ -188,10 +164,7 @@ CREATE TABLE [dbo].[JobNotifications](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Jobs]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Jobs](
 	[Id] [uniqueidentifier] NOT NULL,
 	[JobId] [int] IDENTITY(1,1) NOT NULL,
@@ -218,10 +191,7 @@ CREATE TABLE [dbo].[Jobs](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[JobStatus]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[JobStatus](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
@@ -238,10 +208,7 @@ CREATE TABLE [dbo].[JobStatus](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[JobUploadFiles]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[JobUploadFiles](
 	[Id] [uniqueidentifier] NOT NULL,
 	[FileName] [nvarchar](50) NOT NULL,
@@ -258,10 +225,7 @@ CREATE TABLE [dbo].[JobUploadFiles](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Roles]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Roles](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
@@ -279,10 +243,7 @@ CREATE TABLE [dbo].[Roles](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserAssignEmployee]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserAssignEmployee](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -299,10 +260,7 @@ CREATE TABLE [dbo].[UserAssignEmployee](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserInfo]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserInfo](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -321,10 +279,7 @@ CREATE TABLE [dbo].[UserInfo](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserLevelTypes]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserLevelTypes](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](50) NOT NULL,
@@ -340,10 +295,7 @@ CREATE TABLE [dbo].[UserLevelTypes](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserNotifications]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserNotifications](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Description] [nvarchar](1000) NOT NULL,
@@ -360,10 +312,7 @@ CREATE TABLE [dbo].[UserNotifications](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserPreferences]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserPreferences](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -379,10 +328,7 @@ CREATE TABLE [dbo].[UserPreferences](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[UserRoles]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[UserRoles](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -398,10 +344,7 @@ CREATE TABLE [dbo].[UserRoles](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Users]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Users](
 	[Id] [uniqueidentifier] NOT NULL,
 	[FIrstName] [nvarchar](50) NOT NULL,
@@ -424,10 +367,7 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[Vendor]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Vendor](
 	[Id] [uniqueidentifier] NOT NULL,
 	[UserId] [uniqueidentifier] NOT NULL,
@@ -539,10 +479,7 @@ GO
 ALTER TABLE [dbo].[Vendor] CHECK CONSTRAINT [FK_Vendor_Users]
 GO
 /****** Object:  StoredProcedure [dbo].[usp_AdminSaveUploadFile]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[usp_AdminSaveUploadFile]    
  @JobFiles JobFiletype READONLY,    
  @JobId UNIQUEIDENTIFIER,    
@@ -622,10 +559,7 @@ END
 
 GO
 /****** Object:  StoredProcedure [dbo].[usp_DeleteJob]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[usp_DeleteJob]
 (
 	@JobId UNIQUEIDENTIFIER,
@@ -644,10 +578,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_GetClients]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 
 CREATE PROCEDURE [dbo].[usp_GetClients]
 
@@ -669,10 +600,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[USP_GetJobs]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_GetJobs]
 (
 	@JobStatus VARCHAR(250) = NULL,
@@ -771,10 +699,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[USP_GetLookupData]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_GetLookupData]
 (
 	@Type NVARCHAR(50)
@@ -796,10 +721,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[USP_GetNotifications]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_GetNotifications]
 (
 	@JobId UNIQUEIDENTIFIER,
@@ -825,10 +747,7 @@ END
 
 GO
 /****** Object:  StoredProcedure [dbo].[USP_GetUserLookup]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_GetUserLookup]
 (
 	@Role NVARCHAR(50)
@@ -842,10 +761,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[USP_InsertNotification]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_InsertNotification]
 (
 	@UserId uniqueidentifier,
@@ -859,10 +775,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_MergeJobs]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE   PROCEDURE [dbo].[usp_MergeJobs] (
 	@JobIds VARCHAR(max)
 	,@UserId VARCHAR(50)
@@ -952,10 +865,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_SaveJob]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
   
   
 CREATE PROCEDURE [dbo].[usp_SaveJob]  
@@ -1082,10 +992,7 @@ BEGIN
 END  
 GO
 /****** Object:  StoredProcedure [dbo].[usp_SavePreferences]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 
 CREATE PROCEDURE [dbo].[usp_SavePreferences]
 	@UserId UNIQUEIDENTIFIER,
@@ -1141,10 +1048,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_UpdateJobStatus]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[usp_UpdateJobStatus]
 (
 	@JobId UNIQUEIDENTIFIER,
@@ -1163,10 +1067,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_UpdatePageCount]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[usp_UpdatePageCount]
 	@FileXml XML
 AS
@@ -1187,10 +1088,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[usp_UpdatePassword]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[usp_UpdatePassword]
 	@UserId UNIQUEIDENTIFIER,
 	@Password VARCHAR(250)
@@ -1227,10 +1125,7 @@ BEGIN
 END
 GO
 /****** Object:  StoredProcedure [dbo].[USP_VerifyLogin]    Script Date: 08-06-2024 19:57:20 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE PROCEDURE [dbo].[USP_VerifyLogin]
 (
 	@LoginName nvarchar(50),
@@ -1249,7 +1144,5 @@ BEGIN
 	WHERE LoginName = @LoginName AND [Password] = @Password
 END
 GO
-USE [master]
-GO
-ALTER DATABASE [Maxtra_Dev_08-06-2024] SET  READ_WRITE 
-GO
+
+
