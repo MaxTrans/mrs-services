@@ -1,3 +1,4 @@
+using MaxTransApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -56,7 +57,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
     };
 });
-
+builder.Services.AddSingleton<TokenValidationMiddleware>();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -113,7 +114,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<TokenValidationMiddleware>();
 
 app.MapControllers();
 
