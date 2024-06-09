@@ -19,11 +19,12 @@ namespace DataAccess
             return this.ExecuteNonQuery();
         }
 
-        public DBResult MergeJobs(string jobIds, string userId, string companyId)
+        public DBResult MergeJobs(string jobIds, string userId, string createdBy, string companyId)
         {
             this.ProcedureName = Procedures.Jobs.USP_MERGEJOBS;
             this.AddParameter("@JobIds", jobIds);
             this.AddParameter("@UserId", userId);
+            this.AddParameter("@CreatedBy", createdBy);
             this.AddParameter("@CompanyId", companyId);
             return this.ExecuteNonQuery();
         }
