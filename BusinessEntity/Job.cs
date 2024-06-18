@@ -42,6 +42,7 @@ namespace BusinessEntity
     {
         public List<string> JobIds { get; set; }
         public string CompanyId { get; set; }
+        public string Userid { get; set; }
         public string CreatedBy { get; set; }
     }
 }

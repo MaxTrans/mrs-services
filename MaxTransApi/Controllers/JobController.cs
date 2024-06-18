@@ -2,9 +2,11 @@
 using DataAccess;
 using MaxTransApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MaxTransApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class JobController : ControllerBase
@@ -62,7 +64,7 @@ namespace MaxTransApi.Controllers
         {
             try
             {
-                var res = new JobService().MergeJobs(string.Join(",", job.JobIds), job.CreatedBy, job.CompanyId);
+                var res = new JobService().MergeJobs(string.Join(",", job.JobIds), job.Userid,job.CreatedBy, job.CompanyId);
                 return Ok(new ApiResult
                 {
                     Data = res.ResultCount,

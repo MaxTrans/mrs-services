@@ -1,6 +1,7 @@
-﻿CREATE PROCEDURE usp_MergeJobs (
+﻿CREATE  PROCEDURE [dbo].[usp_MergeJobs] (
 	@JobIds VARCHAR(max)
 	,@UserId VARCHAR(50)
+	,@CreatedBy VARCHAR(50)
 	,@CompanyId VARCHAR(50)
 	)
 AS
@@ -80,8 +81,8 @@ BEGIN
 		)
 	VALUES (
 		@JobID
-		,'Merged Job'
-		,@UserId
+		,'Merge Job'
+		,@CreatedBy
 		,GETUTCDATE()
 		)
 END
