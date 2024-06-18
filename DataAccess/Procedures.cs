@@ -38,5 +38,11 @@ namespace DataAccess
             public const string USP_GETCLIENTS = "usp_GetClients";
             public const string USP_UPDATEPASSWORD = "usp_UpdatePassword";
         }
+
+        public static class Dashboard
+        {
+            public const string USP_DASHBOARD = "usp_Dashboard";
+        }
+
     }
 }

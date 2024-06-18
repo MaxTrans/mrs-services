@@ -112,5 +112,6 @@
     <Build Include="dbo\Functions\fn_GetJobStatus.sql" />
     <Build Include="dbo\Stored Procedures\usp_MergeJobs.sql" />
     <Build Include="Maxtran_Dev_Relationship.sql" />
+    <Build Include="dbo\Stored Procedures\usp_Dashboard.sql" />
   </ItemGroup>
 </Project>
